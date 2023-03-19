@@ -7,6 +7,7 @@ import com.cgi.library.util.ModelMapperFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,9 +18,11 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
+    private static final int PAGE_SIZE = 2;
 
-    public Page<BookDTO> getBooks(Pageable pageable) {
+    public Page<BookDTO> getBooks(int page) {
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
         return bookRepository.findAll(pageable).map(book -> modelMapper.map(book, BookDTO.class));
     }
 
