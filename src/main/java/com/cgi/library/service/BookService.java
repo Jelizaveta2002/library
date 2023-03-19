@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -24,6 +26,16 @@ public class BookService {
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
         Pageable pageable = PageRequest.of(page, PAGE_SIZE);
         return bookRepository.findAll(pageable).map(book -> modelMapper.map(book, BookDTO.class));
+    }
+
+    public List<BookDTO> searchBookByTitle(String title) {
+        ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        List<BookDTO> bookDTOs = new ArrayList<>();
+        List<Book> books = bookRepository.findBookByTitleContainingIgnoreCase(title);
+        for (Book book : books) {
+            bookDTOs.add(modelMapper.map(book, BookDTO.class));
+        }
+        return bookDTOs;
     }
 
     public BookDTO getBook(UUID bookId) {

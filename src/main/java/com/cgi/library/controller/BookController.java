@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +21,11 @@ public class BookController {
     @GetMapping(value = "getBooks")
     public ResponseEntity<Page<BookDTO>> getBooks(int page) {
         return ResponseEntity.ok(bookService.getBooks(page));
+    }
+
+    @GetMapping("search")
+    public List<BookDTO> searchBooksByTitle(@RequestParam String title) {
+        return bookService.searchBookByTitle(title);
     }
 
     @GetMapping(value = "getBook")
