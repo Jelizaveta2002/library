@@ -1,6 +1,7 @@
 package com.cgi.library.controller;
 
 import com.cgi.library.model.BookDTO;
+import com.cgi.library.model.BookStatus;
 import com.cgi.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,11 @@ public class BookController {
     @GetMapping("search")
     public List<BookDTO> searchBooksByTitle(@RequestParam String title) {
         return bookService.searchBookByTitle(title);
+    }
+
+    @GetMapping("searchByStatus")
+    public List<BookDTO> searchBooksByStatus(@RequestParam BookStatus status) {
+        return bookService.searchBookByStatus(status);
     }
 
     @GetMapping(value = "getBook")

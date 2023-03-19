@@ -2,6 +2,7 @@ package com.cgi.library.service;
 
 import com.cgi.library.entity.Book;
 import com.cgi.library.model.BookDTO;
+import com.cgi.library.model.BookStatus;
 import com.cgi.library.repository.BookRepository;
 import com.cgi.library.util.ModelMapperFactory;
 import org.modelmapper.ModelMapper;
@@ -32,6 +33,16 @@ public class BookService {
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
         List<BookDTO> bookDTOs = new ArrayList<>();
         List<Book> books = bookRepository.findBookByTitleContainingIgnoreCase(title);
+        for (Book book : books) {
+            bookDTOs.add(modelMapper.map(book, BookDTO.class));
+        }
+        return bookDTOs;
+    }
+
+    public List<BookDTO> searchBookByStatus(BookStatus status) {
+        ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        List<BookDTO> bookDTOs = new ArrayList<>();
+        List<Book> books = bookRepository.findBookByStatus(status);
         for (Book book : books) {
             bookDTOs.add(modelMapper.map(book, BookDTO.class));
         }
