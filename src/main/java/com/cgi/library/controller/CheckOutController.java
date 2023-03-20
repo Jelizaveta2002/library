@@ -18,8 +18,8 @@ public class CheckOutController {
     private CheckOutService checkOutService;
 
     @GetMapping(value = "getCheckouts")
-    public ResponseEntity<Page<CheckOutDTO>> getCheckOuts(Pageable pageable) {
-        return ResponseEntity.ok(checkOutService.getCheckOuts(pageable));
+    public ResponseEntity<Page<CheckOutDTO>> getCheckOuts(int page) {
+        return ResponseEntity.ok(checkOutService.getCheckOuts(page));
     }
 
     @GetMapping(value = "getCheckout")
