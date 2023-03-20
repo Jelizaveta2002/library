@@ -20,8 +20,8 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping(value = "getBooks")
-    public ResponseEntity<Page<BookDTO>> getBooks(int page) {
-        return ResponseEntity.ok(bookService.getBooks(page));
+    public ResponseEntity<Page<BookDTO>> getBooks(int page, String sortBy) {
+        return ResponseEntity.ok(bookService.getBooks(page, sortBy));
     }
 
     @GetMapping("search")

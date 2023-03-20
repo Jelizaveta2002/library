@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,9 +24,10 @@ public class BookService {
     private BookRepository bookRepository;
     private static final int PAGE_SIZE = 2;
 
-    public Page<BookDTO> getBooks(int page) {
+    public Page<BookDTO> getBooks(int page, String sortBy) {
+        Sort sort = Sort.by(sortBy).ascending();
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
-        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE, sort);
         return bookRepository.findAll(pageable).map(book -> modelMapper.map(book, BookDTO.class));
     }
 

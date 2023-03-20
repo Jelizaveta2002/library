@@ -33,12 +33,12 @@ export default {
   },
   methods: {
     async getBooks() {
-      this.books =(await axios.get("/api/book/getBooks?page=0")).data.content
+      this.books =(await axios.get("/api/book/getBooks?page=0" + "&sortBy=title")).data.content
     },
     async nextPage() {
-      if ((await axios.get("/api/book/getBooks?page=" + (this.page + 1))).data.content.length > 0) {
+      if ((await axios.get("/api/book/getBooks?page=" + (this.page + 1)+ "&sortBy=title")).data.content.length > 0) {
         this.page++
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page)).data.content
+        this.books = (await axios.get("/api/book/getBooks?page=" + this.page + "&sortBy=title")).data.content
         console.log(this.books)
       }
     },
@@ -46,7 +46,7 @@ export default {
     async previousPage() {
       if (this.page > 0) {
         this.page--
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page)).data.content
+        this.books = (await axios.get("/api/book/getBooks?page=" + this.page+ "&sortBy=title")).data.content
         console.log(this.books)
       }
     }
