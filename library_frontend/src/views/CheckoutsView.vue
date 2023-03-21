@@ -12,10 +12,7 @@
       <li v-for="checkout in checkouts" :key="checkout.id">
         <h2>Book: {{ checkout.borrowedBook.title }}</h2>
         <p>Id: {{ checkout.id }}</p>
-        <p>First name: {{ checkout.borrowerFirstName }}</p>
-        <p>Last name: {{ checkout.borrowerLastName }}</p>
-        <p>Checked out date: {{ checkout.checkedOutDate }}</p>
-        <p>Due date: {{ checkout.dueDate }}</p>
+        <button class="feedback3" @click="selectCheckOut(checkout)">More Info</button>
       </li>
     </ul>
   </div>
@@ -52,6 +49,9 @@ export default {
         console.log(this.checkouts)
       }
     },
+    async selectCheckOut(checkout) {
+      this.$router.push({ name: 'CheckOutView', params: { id: checkout.id } })
+  }
   },
 };
 </script>
@@ -68,6 +68,14 @@ table {
   padding: 8px 8px;
   border-radius: 4px;
   border-color: lightcoral;
+}
+
+.feedback3 {
+  background-color : lightskyblue;
+  color: white;
+  padding: 8px 8px;
+  border-radius: 4px;
+  border-color: lightskyblue;
 }
 
 

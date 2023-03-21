@@ -39,5 +39,11 @@ export default {
       this.genre = genre
       this.status = status
   })
-}};
+},
+  methods: {
+    deleteBook() {
+
+    }
+  }
+};
 </script>
