@@ -51,6 +51,12 @@ public class BookService {
         return bookDTOs;
     }
 
+    public void updateBookStatus(UUID id) {
+        Book book = bookRepository.getOne(id);
+        book.setStatus(BookStatus.AVAILABLE);
+        bookRepository.save(book);
+    }
+
     public BookDTO getBook(UUID bookId) {
         Book book = bookRepository.getOne(bookId);
         return ModelMapperFactory.getMapper().map(book, BookDTO.class);

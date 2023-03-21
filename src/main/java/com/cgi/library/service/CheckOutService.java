@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Service
@@ -39,5 +40,11 @@ public class CheckOutService {
 
     public void deleteCheckOut(UUID checkOutId) {
         checkOutRepository.deleteById(checkOutId);
+    }
+
+    public void setReturnedDate(UUID checkOutId) {
+        CheckOut checkOut = checkOutRepository.getOne(checkOutId);
+        checkOut.setReturnedDate(LocalDate.now());
+        checkOutRepository.save(checkOut);
     }
 }

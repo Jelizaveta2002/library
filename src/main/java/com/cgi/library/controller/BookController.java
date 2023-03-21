@@ -29,6 +29,11 @@ public class BookController {
         return bookService.searchBookByTitle(title);
     }
 
+    @GetMapping("updateStatus")
+    public void updateStatus(@RequestParam UUID id) {
+        bookService.updateBookStatus(id);
+    }
+
     @GetMapping("searchByStatus")
     public List<BookDTO> searchBooksByStatus(@RequestParam BookStatus status) {
         return bookService.searchBookByStatus(status);

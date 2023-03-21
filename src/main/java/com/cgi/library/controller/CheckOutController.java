@@ -27,6 +27,11 @@ public class CheckOutController {
         return ResponseEntity.ok(checkOutService.getCheckOut(checkOutId));
     }
 
+    @GetMapping(value = "setDate")
+    public void setReturnedDate(@RequestParam(value = "checkOutId") UUID checkOutId) {
+        checkOutService.setReturnedDate(checkOutId);
+    }
+
     @PostMapping(value = "checkout")
     public ResponseEntity<String> saveCheckOut(@RequestBody CheckOutDTO checkOutDTO) {
         checkOutService.saveCheckOut(checkOutDTO);
