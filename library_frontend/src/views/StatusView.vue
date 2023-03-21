@@ -41,7 +41,6 @@ export default {
     };
   },
   mounted() {
-    this.getBooks();
   },
   methods: {
     async getBooks() {

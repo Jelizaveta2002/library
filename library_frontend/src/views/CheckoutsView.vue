@@ -25,11 +25,9 @@
 import axios from "axios";
 export default {
   data() {
-    let book;
     return {
       checkouts: [],
       page: 0,
-      book
     };
   },
   mounted() {
@@ -53,7 +51,7 @@ export default {
         this.checkouts = (await axios.get("/api/checkout/getCheckouts?page=0" + this.page+ "&sortBy=checkedOutDate")).data.content
         console.log(this.checkouts)
       }
-    }
+    },
   },
 };
 </script>

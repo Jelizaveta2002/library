@@ -12,8 +12,7 @@
       <li v-for="book in books" :key="book.id">
         <h2>{{ book.title }}</h2>
         <p>Author: {{ book.author }}</p>
-        <p>Year: {{ book.year }}</p>
-        <p>Status: {{ book.status }}</p>
+        <button class="feedback3" @click="selectBook(book)">More Info</button>
       </li>
     </ul>
   </div>
@@ -25,7 +24,8 @@ export default {
   data() {
     return {
       books: [],
-      page: 0
+      page: 0,
+      selectedBook: null
     };
   },
   mounted() {
@@ -49,6 +49,9 @@ export default {
         this.books = (await axios.get("/api/book/getBooks?page=" + this.page+ "&sortBy=title")).data.content
         console.log(this.books)
       }
+    },
+    async selectBook(book) {
+      this.$router.push({ name: 'BookView', params: { id: book.id } })
     }
   },
 };
@@ -66,6 +69,14 @@ table {
   padding: 8px 8px;
   border-radius: 4px;
   border-color: lightcoral;
+}
+
+.feedback3 {
+  background-color : lightskyblue;
+  color: white;
+  padding: 8px 8px;
+  border-radius: 4px;
+  border-color: lightskyblue;
 }
 
 
