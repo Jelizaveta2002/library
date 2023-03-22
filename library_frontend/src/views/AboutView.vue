@@ -13,11 +13,13 @@
   </div>
   <div>
     <ul>
-      <li v-for="book in books" :key="book.id">
+      <li class = "book-info" v-for="book in books" :key="book.id">
         <h2>{{ book.title }}</h2>
-        <p>Author: {{ book.author }}</p>
-        <p>Year: {{ book.year }}</p>
-        <p>Status: {{ book.status }}</p>
+        <p>Author:
+          {{ book.author }}</p>
+        <p>Year:
+          {{ book.year }}</p>
+        <button class="my-button" @click="selectBook(book)">More Info</button>
       </li>
     </ul>
   </div>
@@ -37,13 +39,13 @@ export default {
   mounted() {
   },
   methods: {
-    async getBooks() {
-      this.books =(await axios.get("/api/book/getBooks?page=0")).data.content
+    async selectBook(book) {
+      this.$router.push({ name: 'BookView', params: { id: book.id } })
     },
     async nextPage() {
-      if ((await axios.get("/api/book/getBooks?page=" + (this.page + 1))).data.content.length > 0) {
+      if ((await axios.get("/api/book/search?page=" + (this.page + 1)+ "&title=" + this.search)).data.length > 0) {
         this.page++
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page)).data.content
+        this.books = (await axios.get("/api/book/search?page=" + this.page + "&title=" + this.search)).data
         console.log(this.books)
       }
     },
@@ -51,16 +53,13 @@ export default {
     async previousPage() {
       if (this.page > 0) {
         this.page--
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page)).data.content
+        this.books = (await axios.get("/api/book/search?page=" + this.page+ "&title=" + this.search)).data
         console.log(this.books)
       }
     },
 
     async searchBook() {
-      if ((await axios.get("/api/book/search?title=" + this.search)).data.length > 0) {
-        this.page = 0
-      }
-      this.books = (await axios.get("/api/book/search?title=" + this.search)).data
+      this.books = (await axios.get("/api/book/search?page=0" + "&title=" + this.search)).data
     },
 
   },
@@ -79,6 +78,18 @@ table {
   padding: 8px 8px;
   border-radius: 4px;
   border-color: lightcoral;
+}
+
+.book-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
 }
 
 .my-button {

@@ -25,8 +25,8 @@ public class BookController {
     }
 
     @GetMapping("search")
-    public List<BookDTO> searchBooksByTitle(@RequestParam String title) {
-        return bookService.searchBookByTitle(title);
+    public List<BookDTO> searchBooksByTitle(@RequestParam int page, String title) {
+        return bookService.searchBookByTitle(title, page);
     }
 
     @GetMapping("updateStatus")
@@ -35,8 +35,8 @@ public class BookController {
     }
 
     @GetMapping("searchByStatus")
-    public List<BookDTO> searchBooksByStatus(@RequestParam BookStatus status) {
-        return bookService.searchBookByStatus(status);
+    public List<BookDTO> searchBooksByStatus(@RequestParam BookStatus status, int page) {
+        return bookService.searchBookByStatus(status, page);
     }
 
     @GetMapping(value = "getBook")

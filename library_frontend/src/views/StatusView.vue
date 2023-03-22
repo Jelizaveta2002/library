@@ -43,13 +43,10 @@ export default {
   mounted() {
   },
   methods: {
-    async getBooks() {
-      this.books =(await axios.get("/api/book/getBooks?page=0")).data.content
-    },
     async nextPage() {
-      if ((await axios.get("/api/book/getBooks?page=" + (this.page + 1))).data.content.length > 0) {
+      if ((await axios.get("/api/book/searchByStatus?status=" + this.status + "&page=" + this.page)).data.length > 0) {
         this.page++
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page)).data.content
+        this.books = (await axios.get("/api/book/searchByStatus?status=" + this.status + "&page=" + this.page)).data
         console.log(this.books)
       }
     },
@@ -57,15 +54,12 @@ export default {
     async previousPage() {
       if (this.page > 0) {
         this.page--
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page)).data.content
+        this.books = (await axios.get("/api/book/searchByStatus?status=" + this.status + "&page=" + this.page)).data
         console.log(this.books)
       }
     },
     async searchBookByStatus() {
-      if ((await axios.get("/api/book/searchByStatus?status=" + this.status)).data.length > 0) {
-        this.page = 0
-      }
-      this.books = (await axios.get("/api/book/searchByStatus?status=" + this.status)).data
+      this.books = (await axios.get("/api/book/searchByStatus?status=" + this.status + "&page=0")).data
     }
   },
 };

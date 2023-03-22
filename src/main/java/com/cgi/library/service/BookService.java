@@ -31,20 +31,22 @@ public class BookService {
         return bookRepository.findAll(pageable).map(book -> modelMapper.map(book, BookDTO.class));
     }
 
-    public List<BookDTO> searchBookByTitle(String title) {
+    public List<BookDTO> searchBookByTitle(String title, int page) {
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
         List<BookDTO> bookDTOs = new ArrayList<>();
-        List<Book> books = bookRepository.findBookByTitleContainingIgnoreCase(title);
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        List<Book> books = bookRepository.findBookByTitleContainingIgnoreCase(title, pageable);
         for (Book book : books) {
             bookDTOs.add(modelMapper.map(book, BookDTO.class));
         }
         return bookDTOs;
     }
 
-    public List<BookDTO> searchBookByStatus(BookStatus status) {
+    public List<BookDTO> searchBookByStatus(BookStatus status, int page) {
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
         List<BookDTO> bookDTOs = new ArrayList<>();
-        List<Book> books = bookRepository.findBookByStatus(status);
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        List<Book> books = bookRepository.findBookByStatus(status, pageable);
         for (Book book : books) {
             bookDTOs.add(modelMapper.map(book, BookDTO.class));
         }

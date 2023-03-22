@@ -11,7 +11,10 @@
     <ul>
       <li class = "book-info" v-for="book in books" :key="book.id">
         <h2>{{ book.title }}</h2>
-        <p>Author: {{ book.author }}</p>
+        <p>Author:
+          {{ book.author }}</p>
+        <p>Year:
+          {{ book.year }}</p>
         <button class="my-button" @click="selectBook(book)">More Info</button>
       </li>
     </ul>

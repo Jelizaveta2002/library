@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,8 +17,8 @@ import java.util.UUID;
 @Repository
 public interface BookRepository extends JpaRepository<Book, UUID> {
 
-    List<Book> findBookByTitleContainingIgnoreCase(String title);
+    List<Book> findBookByTitleContainingIgnoreCase(String title, Pageable pageable);
 
-    List<Book> findBookByStatus(BookStatus status);
+    List<Book> findBookByStatus(BookStatus status, Pageable pageable);
 
 }
