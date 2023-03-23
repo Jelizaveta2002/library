@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -66,6 +67,10 @@ public class BookService {
 
     public UUID saveBook(BookDTO bookDTO) {
         ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        bookDTO.setId(UUID.randomUUID());
+        bookDTO.setStatus(BookStatus.AVAILABLE);
+        bookDTO.setAdded(LocalDate.now());
+        bookDTO.setComment(null);
         return bookRepository.save(modelMapper.map(bookDTO, Book.class)).getId();
     }
 

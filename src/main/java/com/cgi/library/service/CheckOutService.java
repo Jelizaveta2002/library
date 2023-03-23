@@ -13,7 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class CheckOutService {
@@ -35,6 +37,16 @@ public class CheckOutService {
     }
 
     public void saveCheckOut(CheckOutDTO checkOutDTO) {
+        checkOutDTO.setId(UUID.randomUUID());
+        checkOutDTO.setCheckedOutDate(LocalDate.now());
+        LocalDate startDate = LocalDate.of(2023, 4, 1); // Start date
+        LocalDate endDate = LocalDate.of(2023, 7, 31); // End date
+
+        long days = ChronoUnit.DAYS.between(startDate, endDate);
+        long randomDay = ThreadLocalRandom.current().nextLong(days + 1);
+
+        LocalDate randomDate = startDate.plusDays(randomDay);
+        checkOutDTO.setDueDate(randomDate);
         checkOutRepository.save(ModelMapperFactory.getMapper().map(checkOutDTO, CheckOut.class));
     }
 
