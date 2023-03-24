@@ -35,9 +35,9 @@ export default {
       this.checkouts =(await axios.get("/api/checkout/getCheckouts?page=0" + "&sortBy=checkedOutDate")).data.content
     },
     async nextPage() {
-      if ((await axios.get("/api/checkout/getCheckouts?page=0" + (this.page + 1)+ "&sortBy=checkedOutDate")).data.content.length > 0) {
+      if ((await axios.get("/api/checkout/getCheckouts?page=" + (this.page + 1)+ "&sortBy=checkedOutDate")).data.content.length > 0) {
         this.page++
-        this.checkouts = (await axios.get("/api/checkout/getCheckouts?page=0" + this.page + "&sortBy=checkedOutDate")).data.content
+        this.checkouts = (await axios.get("/api/checkout/getCheckouts?page=" + this.page + "&sortBy=checkedOutDate")).data.content
         console.log(this.checkouts)
       }
     },
@@ -45,7 +45,7 @@ export default {
     async previousPage() {
       if (this.page > 0) {
         this.page--
-        this.checkouts = (await axios.get("/api/checkout/getCheckouts?page=0" + this.page+ "&sortBy=checkedOutDate")).data.content
+        this.checkouts = (await axios.get("/api/checkout/getCheckouts?page=" + this.page+ "&sortBy=checkedOutDate")).data.content
         console.log(this.checkouts)
       }
     },
@@ -97,6 +97,7 @@ table {
   touch-action: manipulation;
   margin-bottom: 10px;
 }
+
 
 
 .my-button:hover {

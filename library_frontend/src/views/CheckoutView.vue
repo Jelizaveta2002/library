@@ -1,5 +1,5 @@
 <template>
-  <div class="book-info">
+  <div class="book-info22">
     <h2 class="book-title" >{{ title }}</h2>
     <p class = "book-author">Borrower Name: {{ borrowerFirstName }}</p>
     <p class = "book-author">Borrower Surname: {{ borrowerLastName }}</p>
@@ -105,13 +105,13 @@ export default {
   border-radius: 4px;
   border-color: lightskyblue;
 }
-.book-info {
+.book-info22 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin: 20px;
-  padding: 20px;
+  margin: 50px;
+  padding: 60px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: #FFFFFF;

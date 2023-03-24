@@ -3,12 +3,18 @@ import HomeView from '../views/HomeView.vue'
 import BookView from '../views/BookView.vue';
 import CheckoutView from "@/views/CheckoutView";
 import AddBook from "@/views/AddBook";
+import LateCheckouts from "@/views/LateCheckouts";
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/late',
+    name: 'late',
+    component: LateCheckouts
   },
   {
     path: '/add',

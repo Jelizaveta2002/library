@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -42,5 +44,10 @@ public class CheckOutController {
     public ResponseEntity<String> deleteCheckOut(@RequestParam(value = "checkOutId") UUID checkOutId) {
         checkOutService.deleteCheckOut(checkOutId);
         return ResponseEntity.ok("");
+    }
+
+    @GetMapping(value = "getLateCheckouts")
+    public ResponseEntity<List<CheckOutDTO>> getLateCheckOuts(int page) {
+        return ResponseEntity.ok(checkOutService.getLateCheckOuts(page));
     }
 }

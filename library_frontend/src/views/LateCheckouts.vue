@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2><strong>Books</strong></h2>
+    <h2><strong>Late Checkouts</strong></h2>
     <h4>Page: {{ this.page + 1 }}</h4>
   </div>
   <div class="col-sm-6 mx-auto" style="padding: 5px">
@@ -9,13 +9,10 @@
   </div>
   <div>
     <ul>
-      <li class = "book-info" v-for="book in books" :key="book.id">
-        <h2>{{ book.title }}</h2>
-        <p>Author:
-          {{ book.author }}</p>
-        <p>Year:
-          {{ book.year }}</p>
-        <button class="my-button" @click="selectBook(book)">More Info</button>
+      <li v-for="checkout in checkouts" :key="checkout.id">
+        <h2>Book: {{ checkout.borrowedBook.title }}</h2>
+        <p>Due Date: {{ checkout.dueDate }}</p>
+        <button class="my-button" @click="selectCheckOut(checkout)">More Info</button>
       </li>
     </ul>
   </div>
@@ -26,9 +23,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      books: [],
+      checkouts: [],
       page: 0,
-      selectedBook: null
     };
   },
   mounted() {
@@ -36,25 +32,25 @@ export default {
   },
   methods: {
     async getBooks() {
-      this.books =(await axios.get("/api/book/getBooks?page=0" + "&sortBy=title")).data.content
+      this.checkouts =(await axios.get("/api/checkout/getLateCheckouts?page=0")).data
     },
     async nextPage() {
-      if ((await axios.get("/api/book/getBooks?page=" + (this.page + 1)+ "&sortBy=title")).data.content.length > 0) {
+      if ((await axios.get("/api/checkout/getLateCheckouts?page=" + (this.page + 1))).data.length > 0) {
         this.page++
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page + "&sortBy=title")).data.content
-        console.log(this.books)
+        this.checkouts = (await axios.get("/api/checkout/getLateCheckouts?page=" + this.page)).data
+        console.log(this.checkouts)
       }
     },
 
     async previousPage() {
       if (this.page > 0) {
         this.page--
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page+ "&sortBy=title")).data.content
-        console.log(this.books)
+        this.checkouts = (await axios.get("/api/checkout/getLateCheckouts?page=" + this.page)).data
+        console.log(this.checkouts)
       }
     },
-    async selectBook(book) {
-      this.$router.push({ name: 'BookView', params: { id: book.id } })
+    async selectCheckOut(checkout) {
+      this.$router.push({ name: 'CheckOutView', params: { id: checkout.id } })
     }
   },
 };
@@ -72,18 +68,6 @@ table {
   padding: 8px 8px;
   border-radius: 4px;
   border-color: lightcoral;
-}
-
-.book-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  background-color: #FFFFFF;
 }
 
 .feedback3 {
@@ -119,6 +103,7 @@ table {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
 }
+
 
 
 strong {

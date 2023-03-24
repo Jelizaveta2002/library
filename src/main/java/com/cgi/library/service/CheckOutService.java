@@ -1,19 +1,20 @@
 package com.cgi.library.service;
 
+import com.cgi.library.entity.Book;
 import com.cgi.library.entity.CheckOut;
+import com.cgi.library.model.BookDTO;
 import com.cgi.library.model.CheckOutDTO;
 import com.cgi.library.repository.CheckOutRepository;
 import com.cgi.library.util.ModelMapperFactory;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -58,5 +59,16 @@ public class CheckOutService {
         CheckOut checkOut = checkOutRepository.getOne(checkOutId);
         checkOut.setReturnedDate(LocalDate.now());
         checkOutRepository.save(checkOut);
+    }
+
+    public List<CheckOutDTO> getLateCheckOuts(int page) {
+        List<CheckOutDTO> checkOutOverDueDTO = new ArrayList<>();
+        ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        List<CheckOut> checkOutList = checkOutRepository.findOverdueBooks(LocalDate.now(), pageable);
+        for (CheckOut checkOut: checkOutList) {
+            checkOutOverDueDTO.add(modelMapper.map(checkOut, CheckOutDTO.class));
+        }
+        return checkOutOverDueDTO;
     }
 }
