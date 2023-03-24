@@ -71,6 +71,7 @@ public class BookService {
         bookDTO.setStatus(BookStatus.AVAILABLE);
         bookDTO.setAdded(LocalDate.now());
         bookDTO.setComment(null);
+        bookDTO.setDueDate(LocalDate.now().plusMonths(3));
         return bookRepository.save(modelMapper.map(bookDTO, Book.class)).getId();
     }
 
