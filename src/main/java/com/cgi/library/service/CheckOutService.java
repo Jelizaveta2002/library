@@ -71,4 +71,26 @@ public class CheckOutService {
         }
         return checkOutOverDueDTO;
     }
+
+    public List<CheckOutDTO> getCheckOutsWhereReturnNull(int page) {
+        List<CheckOutDTO> checkOutDTOList = new ArrayList<>();
+        ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        List<CheckOut> checkOutList = checkOutRepository.findAllByReturnedDateIsNull(pageable);
+        for (CheckOut checkOut: checkOutList) {
+            checkOutDTOList.add(modelMapper.map(checkOut, CheckOutDTO.class));
+        }
+        return checkOutDTOList;
+    }
+
+    public List<CheckOutDTO> getCheckOutsWhereReturnNotNull(int page) {
+        List<CheckOutDTO> checkOutDTOList = new ArrayList<>();
+        ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        List<CheckOut> checkOutList = checkOutRepository.findAllByReturnedDateIsNotNull(pageable);
+        for (CheckOut checkOut: checkOutList) {
+            checkOutDTOList.add(modelMapper.map(checkOut, CheckOutDTO.class));
+        }
+        return checkOutDTOList;
+    }
 }

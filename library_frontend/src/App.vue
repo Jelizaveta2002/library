@@ -3,7 +3,8 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/status">Status</router-link> |
-    <router-link to="/checkouts">Checkouts</router-link> |
+    <router-link to="/checkouts">Opened Checkouts</router-link> |
+    <router-link to="/closedCheckouts">Closed Checkouts</router-link> |
     <router-link to="/add">Add book</router-link> |
     <router-link to="/late">Late Checkouts</router-link>
   </nav>

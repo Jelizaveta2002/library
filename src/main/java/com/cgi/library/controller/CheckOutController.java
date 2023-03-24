@@ -24,6 +24,16 @@ public class CheckOutController {
         return ResponseEntity.ok(checkOutService.getCheckOuts(page, sortBy));
     }
 
+    @GetMapping(value = "getClosedCheckouts")
+    public ResponseEntity<List<CheckOutDTO>> getClosedCheckOuts(int page) {
+        return ResponseEntity.ok(checkOutService.getCheckOutsWhereReturnNotNull(page));
+    }
+
+    @GetMapping(value = "getOpenedCheckouts")
+    public ResponseEntity<List<CheckOutDTO>> getOpenedCheckOuts(int page) {
+        return ResponseEntity.ok(checkOutService.getCheckOutsWhereReturnNull(page));
+    }
+
     @GetMapping(value = "getCheckout")
     public ResponseEntity<CheckOutDTO> getCheckOut(@RequestParam(value = "checkOutId") UUID checkOutId) {
         return ResponseEntity.ok(checkOutService.getCheckOut(checkOutId));

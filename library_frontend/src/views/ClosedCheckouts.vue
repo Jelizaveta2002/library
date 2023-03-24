@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2><strong>Opened Checkouts</strong></h2>
+    <h2><strong>Closed Checkouts</strong></h2>
     <h4>Page: {{ this.page + 1 }}</h4>
   </div>
   <div class="col-sm-6 mx-auto" style="padding: 5px">
@@ -32,12 +32,12 @@ export default {
   },
   methods: {
     async getBooks() {
-      this.checkouts =(await axios.get("/api/checkout/getOpenedCheckouts?page=0")).data
+      this.checkouts =(await axios.get("/api/checkout/getClosedCheckouts?page=0")).data
     },
     async nextPage() {
-      if ((await axios.get("/api/checkout/getOpenedCheckouts?page=" + (this.page + 1))).data.length > 0) {
+      if ((await axios.get("/api/checkout/getClosedCheckouts?page=" + (this.page + 1))).data.length > 0) {
         this.page++
-        this.checkouts = (await axios.get("/api/checkout/getOpenedCheckouts?page=" + this.page)).data
+        this.checkouts = (await axios.get("/api/checkout/getClosedCheckouts?page=" + this.page)).data
         console.log(this.checkouts)
       }
     },
@@ -45,13 +45,13 @@ export default {
     async previousPage() {
       if (this.page > 0) {
         this.page--
-        this.checkouts = (await axios.get("/api/checkout/getOpenedCheckouts?page=" + this.page)).data
+        this.checkouts = (await axios.get("/api/checkout/getClosedCheckouts?page=" + this.page)).data
         console.log(this.checkouts)
       }
     },
     async selectCheckOut(checkout) {
       this.$router.push({ name: 'CheckOutView', params: { id: checkout.id } })
-  }
+    }
   },
 };
 </script>
