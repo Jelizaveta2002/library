@@ -19,7 +19,7 @@
           {{ book.author }}</p>
         <p>Year:
           {{ book.year }}</p>
-        <button class="my-button" @click="selectBook(book)">More Info</button>
+        <input type="button" v-on:click="selectBook(book)" class="my-button" style="margin-left: 5px" value="More Info">
       </li>
     </ul>
   </div>

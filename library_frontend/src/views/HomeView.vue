@@ -15,7 +15,7 @@
           {{ book.author }}</p>
         <p>Year:
           {{ book.year }}</p>
-        <button class="my-button" @click="selectBook(book)">More Info</button>
+        <input type="button" v-on:click="selectBook(book)" class="my-button" style="margin-left: 5px" value="More Info">
       </li>
     </ul>
   </div>
@@ -28,11 +28,16 @@ export default {
     return {
       books: [],
       page: 0,
-      selectedBook: null
+      selectedBook: null,
+      favoriteBooks: []
     };
   },
   mounted() {
     this.getBooks();
+    const favoriteBooks = localStorage.getItem('favoriteBooks');
+    if (favoriteBooks) {
+      this.favoriteBooks = JSON.parse(favoriteBooks);
+    }
   },
   methods: {
     async getBooks() {
@@ -80,7 +85,7 @@ table {
   align-items: center;
   justify-content: space-between;
   margin: 20px;
-  padding: 20px;
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: #FFFFFF;

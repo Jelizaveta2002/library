@@ -6,8 +6,8 @@
     <p>Due Date: {{ dueDate }}</p>
     <p>Checked-Out Date: {{ checkedOutDate }}</p>
     <p>Returned Date: {{ returnedDate }}</p>
-    <button class="my-button" @click="watchBook(borrowedId)">Watch Book</button>
-    <button class="my-button" @click="deleteCheckOut(borrowedId)">Return Book</button>
+    <input type="button" v-on:click="watchBook(borrowedId)" class="my-button" style="margin-left: 5px" value="Watch Book">
+    <input type="button" v-on:click="deleteCheckOut(borrowedId)" class="my-button" style="margin-left: 5px" value="Return Book">
     <p>NB: After deleting checkout book
       status will be automatically changed to AVAILABLE</p>
   </div>

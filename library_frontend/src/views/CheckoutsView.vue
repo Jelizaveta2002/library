@@ -9,10 +9,10 @@
   </div>
   <div>
     <ul>
-      <li v-for="checkout in checkouts" :key="checkout.id">
+      <li class="book-info23" v-for="checkout in checkouts" :key="checkout.id">
         <h2>Book: {{ checkout.borrowedBook.title }}</h2>
-        <p>Id: {{ checkout.id }}</p>
-        <button class="my-button" @click="selectCheckOut(checkout)">More Info</button>
+        <p>Due Date: {{ checkout.dueDate }}</p>
+        <input type="button" v-on:click="selectCheckOut(checkout)" class="my-button" style="margin-left: 5px" value="More Info">
       </li>
     </ul>
   </div>
@@ -76,6 +76,18 @@ table {
   padding: 8px 8px;
   border-radius: 4px;
   border-color: lightskyblue;
+}
+
+.book-info23 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
 }
 
 .my-button {

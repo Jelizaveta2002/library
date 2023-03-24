@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <h2><strong>Closed Checkouts</strong></h2>
     <h4>Page: {{ this.page + 1 }}</h4>
   </div>
@@ -7,12 +7,12 @@
     <input type="button" v-on:click="previousPage" class="my-button" style="margin-right: 5px" value="BACK">
     <input type="button" v-on:click="nextPage" class="my-button" style="margin-left: 5px" value="NEXT">
   </div>
-  <div>
+  <div >
     <ul>
-      <li v-for="checkout in checkouts" :key="checkout.id">
+      <li class="book-info23" v-for="checkout in checkouts" :key="checkout.id">
         <h2>Book: {{ checkout.borrowedBook.title }}</h2>
-        <p>Id: {{ checkout.id }}</p>
-        <button class="my-button" @click="selectCheckOut(checkout)">More Info</button>
+        <p>Returned Date: {{ checkout.returnedDate }}</p>
+        <input type="button" v-on:click="selectCheckOut(checkout)" class="my-button" style="margin-left: 5px" value="More Info">
       </li>
     </ul>
   </div>
@@ -103,6 +103,18 @@ table {
 .my-button:hover {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+}
+
+.book-info23 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
 }
 
 

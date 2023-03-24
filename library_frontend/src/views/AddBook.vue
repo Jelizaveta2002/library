@@ -25,7 +25,7 @@
           <input type="text" class="form-control" id="inputPassword" v-model="book.checkOutCount" style="margin-bottom: 10px">
         </div>
         <div class="col-12">
-          <button type="submit" class="my-button" v-on:click=postData>Add book</button>
+          <input type="button" v-on:click="postData" class="my-button" style="margin-left: 5px" value="Add Book">
         </div>
       </form>
     </div>
@@ -54,7 +54,7 @@ export default {
     postData() {
       this.book = axios.post("/api/book/saveBook", this.book)
       alert("Book is successfully added !")
-      router.push("/home")
+      router.push("/")
     }
   },
 };

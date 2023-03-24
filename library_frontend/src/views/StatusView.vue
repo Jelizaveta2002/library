@@ -18,11 +18,13 @@
   </div>
   <div>
     <ul>
-      <li v-for="book in books" :key="book.id">
+      <li class = "book-info" v-for="book in books" :key="book.id">
         <h2>{{ book.title }}</h2>
-        <p>Author: {{ book.author }}</p>
-        <p>Year: {{ book.year }}</p>
-        <p>Status: {{ book.status }}</p>
+        <p>Author:
+          {{ book.author }}</p>
+        <p>Year:
+          {{ book.year }}</p>
+        <input type="button" v-on:click="selectBook(book)" class="my-button" style="margin-left: 5px" value="More Info">
       </li>
     </ul>
   </div>
@@ -60,6 +62,9 @@ export default {
     },
     async searchBookByStatus() {
       this.books = (await axios.get("/api/book/searchByStatus?status=" + this.status + "&page=0")).data
+    },
+    async selectBook(book) {
+      this.$router.push({ name: 'BookView', params: { id: book.id } })
     }
   },
 };
