@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <router-link to="/">Home</router-link> |
     <router-link to="/search">Books</router-link> |
-    <router-link to="/options">Checkouts</router-link>
+    <router-link to="/options">Checkouts</router-link> |
+    <router-link to="/favourite">Favourite</router-link>
   </nav>
   <router-view/>
 </template>

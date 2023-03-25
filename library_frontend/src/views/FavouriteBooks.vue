@@ -1,80 +1,47 @@
 <template>
   <div>
-    <h2><strong>Books</strong></h2>
-    <h4>Page: {{ this.page + 1 }}</h4>
-  </div>
-  <div class="col-sm-6 mx-auto" style="padding: 5px">
-    <input type="button" v-on:click="previousPage" class="my-button" style="margin-right: 5px" value="BACK">
-    <input type="button" v-on:click="nextPage" class="my-button" style="margin-left: 5px" value="NEXT">
+    <h2><strong>Favourite books</strong></h2>
   </div>
   <div>
     <ul>
-      <li class = "book-info" v-for="book in books" :key="book.id">
+      <li class = "book-info" v-for="book in this.favoriteBooks" :key="book.id">
         <h2>{{ book.title }}</h2>
         <p>Author:
           {{ book.author }}</p>
         <p>Year:
           {{ book.year }}</p>
         <input type="button" v-on:click="selectBook(book)" class="my-button" style="margin-left: 5px" value="More Info">
-        <input type="button" v-on:click="toggleFavorite(book)" class="my-button" style="margin-left: 5px" value="Like">
+        <input type="button" v-on:click="deleteFavourite(book)" class="my-button" style="margin-left: 5px" value="Delete from Favourites">
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data() {
     return {
-      books: [],
-      page: 0,
-      selectedBook: null,
       favoriteBooks: []
     };
   },
   mounted() {
-    this.getBooks();
     const favoriteBooks = localStorage.getItem('favoriteBooks');
     if (favoriteBooks) {
       this.favoriteBooks = JSON.parse(favoriteBooks);
     }
   },
   methods: {
-    async getBooks() {
-      this.books =(await axios.get("/api/book/getBooks?page=0" + "&sortBy=title")).data.content
-    },
-    async nextPage() {
-      if ((await axios.get("/api/book/getBooks?page=" + (this.page + 1)+ "&sortBy=title")).data.content.length > 0) {
-        this.page++
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page + "&sortBy=title")).data.content
-        console.log(this.books)
-      }
-    },
-
-    async previousPage() {
-      if (this.page > 0) {
-        this.page--
-        this.books = (await axios.get("/api/book/getBooks?page=" + this.page+ "&sortBy=title")).data.content
-        console.log(this.books)
-      }
-    },
-    async selectBook(book) {
-      this.$router.push({ name: 'BookView', params: { id: book.id } })
-    },
-    async toggleFavorite(book) {
-      const index = this.favoriteBooks.indexOf(book);
-      if (!this.favoriteBooks.includes('favoriteBooks', book)) {
-        if (index !== -1) {
-          this.favoriteBooks.splice(index, 1);
-        } else {
-          this.favoriteBooks.push(book);
-        }
+    deleteFavourite() {
+      const bookIndexToDelete = this.favoriteBooks.findIndex(book => book === book);
+      if (bookIndexToDelete !== -1) {
+        this.favoriteBooks.splice(bookIndexToDelete, 1);
         localStorage.setItem('favoriteBooks', JSON.stringify(this.favoriteBooks));
-      }
     }
   },
-};
+    async selectBook(book) {
+      this.$router.push({ name: 'BookView', params: { id: book.id } })
+    }
+}};
 </script>
 
 <style scoped>

@@ -36,7 +36,7 @@ export default {
         {
           id: 4,
           title: 'Books',
-          path: '/books'
+          path: '/'
         }
       ]
     }

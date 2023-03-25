@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="book-info22">
     <h2>{{ title }}</h2>
     <p>Author: {{ author }}</p>
     <p>Genre: {{ genre }}</p>
@@ -47,3 +47,17 @@ export default {
   }
 };
 </script>
+
+<style>
+.book-info22 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 50px;
+  padding: 60px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
+}
+</style>
