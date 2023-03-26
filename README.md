@@ -1,7 +1,7 @@
 # Setting up Frontend
 
 For frontend I chose Vue.js. To run frontend you need to open 
-file "library_frontend" and run command "npm run serve"
+file "library_frontend" and run command "npm install" and then "npm run serve"
 
 ## Backend
 

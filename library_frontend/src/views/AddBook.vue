@@ -34,7 +34,6 @@
 
 <script>
 import axios from "axios";
-import router from "@/router";
 
 export default {
   data(){
@@ -51,10 +50,10 @@ export default {
   mounted() {
   },
   methods: {
-    postData() {
-      this.book = axios.post("/api/book/saveBook", this.book)
+    async postData() {
+      this.book = (await axios.post("/api/book/saveBook", this.book)).data
       alert("Book is successfully added !")
-      router.push("/")
+      await this.$router.push({ name: 'BookView', params: { id: this.book } })
     }
   },
 };
