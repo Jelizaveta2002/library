@@ -30,11 +30,16 @@ export default {
         },
         {
           id: 3,
+          title: 'Multiple Criteria',
+          path: '/multiple'
+        },
+        {
+          id: 4,
           title: 'Add Book',
           path: '/add'
         },
         {
-          id: 4,
+          id: 5,
           title: 'Books',
           path: '/'
         }

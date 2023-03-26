@@ -8,6 +8,8 @@ file "library_frontend" in Terminal and run "npm run serve" command.
 On back-end I made some additional services and controllers,
 that allow finding books by specific features (status, title).
 
+I have method that allow to find book by 3 criteria.
+
 In my project I also added pagination (2 books/checkouts) per page.
 
 Both books and checkouts are returned sorted.
@@ -29,10 +31,11 @@ On frontend I have 4 main pages.
 From this page there is possible to delete particular book, click "more info" to watch
 book in a separate page or mark this book as a favourite (it appears in FAVOURITE section).(Used localStorage)
 
-2. Books Options (contains 4 options to work with)
+2. Books Options (contains 5 options to work with)
    1. Search by status - leads to separate page where choosing status are returned all the books 
    with chosen status.
    2. Search by title - leads to separate page where it is possible to find book by title (ignored case).
+   3. Search book by multiple criteria - allow user to find particular book by 3 criteria (title, author, status)
    3. Add book - possible to add a new book to the database.
    4. Books - leads to the page where all books are displayed.
 
