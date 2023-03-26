@@ -17,6 +17,7 @@
           {{ book.year }}</p>
         <input type="button" v-on:click="selectBook(book)" class="my-button" style="margin-left: 5px" value="More Info">
         <input type="button" v-on:click="toggleFavorite(book)" class="my-button" style="margin-left: 5px" value="Like">
+        <input type="button" v-on:click="deleteBook(book)" class="my-button" style="margin-left: 5px" value="Delete Book">
       </li>
     </ul>
   </div>
@@ -71,24 +72,30 @@ export default {
           this.favoriteBooks.push(book);
         }
         localStorage.setItem('favoriteBooks', JSON.stringify(this.favoriteBooks));
+        alert("Book marked as favourite !")
       }
+    },
+    deleteBook(obj) {
+      if (obj.status === "BORROWED") {
+        alert("Book can not be deleted, because it is borrowed or marked as favourite !")
+      }
+      else {
+        if (window.confirm('Are you sure you want to delete this book?')) {
+          axios.delete('/api/book/deleteBook?bookId=' + obj.id)
+          alert("Book is deleted successfully ")
+          const bookIndexToDelete = this.favoriteBooks.findIndex(book => obj.id === book.id);
+          this.favoriteBooks.splice(bookIndexToDelete, 1);
+          localStorage.setItem('favoriteBooks', JSON.stringify(this.favoriteBooks));
+          location.reload()
+        }
     }
   },
-};
+}};
 </script>
 
 <style scoped>
 
 table {
-}
-
-
-.feedback2 {
-  background-color : lightcoral;
-  color: white;
-  padding: 8px 8px;
-  border-radius: 4px;
-  border-color: lightcoral;
 }
 
 .book-info {
@@ -97,18 +104,10 @@ table {
   align-items: center;
   justify-content: space-between;
   margin: 20px;
-  padding: 5px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: #FFFFFF;
-}
-
-.feedback3 {
-  background-color : lightskyblue;
-  color: white;
-  padding: 8px 8px;
-  border-radius: 4px;
-  border-color: lightskyblue;
 }
 
 .my-button {

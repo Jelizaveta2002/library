@@ -1,6 +1,7 @@
 <template>
   <nav>
-    <router-link to="/search">Books</router-link> |
+    <router-link to="/">Books</router-link> |
+    <router-link to="/search">Book Options</router-link> |
     <router-link to="/options">Checkouts</router-link> |
     <router-link to="/favourite">Favourite</router-link>
   </nav>

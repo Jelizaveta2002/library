@@ -129,32 +129,4 @@ export default {
   margin: 0;
 }
 
-.book-cover {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  margin-right: 20px;
-  border-radius: 5px;
-}
-
-.book-description {
-  font-size: 16px;
-  margin: 20px 0;
-  line-height: 1.5;
-}
-
-.book-link {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.book-link:hover {
-  background-color: #388E3C;
-}
-
 </style>

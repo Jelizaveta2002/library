@@ -15,6 +15,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      bookId: null,
       book: null,
       title: null,
       author: null,
@@ -25,6 +26,7 @@ export default {
   },
   async mounted() {
     const bookId = this.$route.params.id
+    this.bookId = bookId;
     console.log(bookId)
     axios.get("/api/book/getBook?bookId=" + bookId).then(response => {
       this.book = response.data
@@ -41,9 +43,7 @@ export default {
   })
 },
   methods: {
-    deleteBook() {
 
-    }
   }
 };
 </script>
@@ -55,7 +55,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   margin: 50px;
-  padding: 60px;
+  padding: 50px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   background-color: #FFFFFF;

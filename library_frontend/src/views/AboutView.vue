@@ -60,7 +60,7 @@ export default {
 
     async searchBook() {
       this.books = (await axios.get("/api/book/search?page=0" + "&title=" + this.search)).data
-    },
+    }
 
   },
 };
@@ -69,15 +69,6 @@ export default {
 <style scoped>
 
 table {
-}
-
-
-.feedback2 {
-  background-color : lightcoral;
-  color: white;
-  padding: 8px 8px;
-  border-radius: 4px;
-  border-color: lightcoral;
 }
 
 .book-info {

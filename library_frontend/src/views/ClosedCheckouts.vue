@@ -62,21 +62,6 @@ table {
 }
 
 
-.feedback2 {
-  background-color : lightcoral;
-  color: white;
-  padding: 8px 8px;
-  border-radius: 4px;
-  border-color: lightcoral;
-}
-
-.feedback3 {
-  background-color : lightskyblue;
-  color: white;
-  padding: 8px 8px;
-  border-radius: 4px;
-  border-color: lightskyblue;
-}
 
 .my-button {
   background-color: #c2fbd7;

@@ -75,19 +75,6 @@ label {
 }
 
 
-
-.book-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  background-color: #FFFFFF;
-}
-
 .my-button {
   background-color: #c2fbd7;
   border-radius: 100px;

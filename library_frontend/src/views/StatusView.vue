@@ -65,7 +65,7 @@ export default {
     },
     async selectBook(book) {
       this.$router.push({ name: 'BookView', params: { id: book.id } })
-    }
+    },
   },
 };
 </script>
@@ -76,22 +76,6 @@ table {
 }
 
 
-.feedback2 {
-  background-color : lightcoral;
-  color: white;
-  padding: 8px 8px;
-  border-radius: 4px;
-  border-color: lightcoral;
-}
-
-
-.feedback {
-  background-color : #31B0D5;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 4px;
-  border-color: #46b8da;
-}
 
 .my-button {
   background-color: #c2fbd7;
@@ -117,6 +101,18 @@ table {
 .my-button:hover {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.05) rotate(-1deg);
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
 }
 
 
