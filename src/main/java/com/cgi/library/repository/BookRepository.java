@@ -21,4 +21,6 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 
     List<Book> findBookByStatus(BookStatus status, Pageable pageable);
 
+    List<Book> findBookByTitleContainingIgnoreCaseAndAuthorContainsIgnoreCaseAndStatus(String title, String author, BookStatus status, Pageable pageable);
+
 }

@@ -54,6 +54,17 @@ public class BookService {
         return bookDTOs;
     }
 
+    public List<BookDTO> searchBookByMultipleCriteria(String title, String author, BookStatus status, int page) {
+        ModelMapper modelMapper = ModelMapperFactory.getMapper();
+        List<BookDTO> bookDTOs = new ArrayList<>();
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        List<Book> books = bookRepository.findBookByTitleContainingIgnoreCaseAndAuthorContainsIgnoreCaseAndStatus(title, author, status, pageable);
+        for (Book book : books) {
+            bookDTOs.add(modelMapper.map(book, BookDTO.class));
+        }
+        return bookDTOs;
+    }
+
     public void updateBookStatus(UUID id) {
         Book book = bookRepository.getOne(id);
         book.setStatus(BookStatus.AVAILABLE);

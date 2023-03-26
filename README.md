@@ -1,11 +1,11 @@
 # Setting up Frontend
 
-For frontend I chose Vue.js. To run frontend you need to open 
-file "library_frontend" and run command "npm install" and then "npm run serve"
+For front-end I chose Vue.js. To run frontend you need to open 
+file "library_frontend" in Terminal and run "npm run serve" command.
 
-## Backend
+## Back-end
 
-On backend I made some additional services and controllers,
+On back-end I made some additional services and controllers,
 that allow finding books by specific features (status, title).
 
 In my project I also added pagination (2 books/checkouts) per page.
@@ -19,9 +19,9 @@ late (those that are over dated))
 
 For getting all late checkouts I in CheckoutRepository I used @Query using native SQL statements.
 
-From frontend I do not use checkout deletion, but I use setDate method to set up returned date for checkout.
+From front-end I do not use checkout deletion, but I use setDate method to set up returned date for checkout.
 
-## Frontend
+## Front-end
 
 On frontend I have 4 main pages.
 
@@ -45,7 +45,12 @@ checkoutView.
 favourites and also get more info about this book by pushing "more info".
 
 
+## Additional Information
 Working on frontend I also added modal confirmation dialogues.
+For my project I used some materials from one of my university projects: https://github.com/Jelizaveta2002/iti0302-frontend
+I also used some tips from https://stackoverflow.com/ and https://chat.openai.com/chat for particular information
+(mostly related to HTML and CSS)
+
 
 
 

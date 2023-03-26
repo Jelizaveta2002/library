@@ -39,6 +39,11 @@ public class BookController {
         return bookService.searchBookByStatus(status, page);
     }
 
+    @GetMapping("searchByMultiple")
+    public List<BookDTO> searchBooksByMultipleCriteria(@RequestParam String title, String author, BookStatus status, int page) {
+        return bookService.searchBookByMultipleCriteria(title, author,status, page);
+    }
+
     @GetMapping(value = "getBook")
     public ResponseEntity<BookDTO> getBook(@RequestParam(value = "bookId") UUID bookId) {
         return ResponseEntity.ok(bookService.getBook(bookId));
