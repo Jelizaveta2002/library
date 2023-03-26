@@ -1,74 +1,51 @@
-# Test assignment
+# Setting up Frontend
 
-Welcome to CGI test assignment!
-This is the project template which contains Angular front-end and Spring Boot back-end
+For frontend I chose Vue.js. To run frontend you need to open 
+file "library_frontend" and run command "npm run serve"
 
-## Setting up Spring Boot application.
+## Backend
 
-1. Make sure you have installed Java. For development OpenJDK 11 from [Adoptium](https://adoptium.net/) should be used.
-2. Install Intellij IDEA Commmunity edition
-3. Import the Maven project
-4. Run the LibraryApplication from IDE.
+On backend I made some additional services and controllers,
+that allow finding books by specific features (status, title).
 
-However, you can also install Maven and run the back-end from terminal with
-`mvn spring-boot:run` in project directory
-(make sure your JAVA_HOME variable is set up to point to
-your Java 11 installation in that case)
+In my project I also added pagination (2 books/checkouts) per page.
 
-## Setting up Angular application.
+Both books and checkouts are returned sorted.
 
-To get Angular app up and running you need to:
+It is possible to save book (id is automatically generated, dueDate = localDate + 3months)
 
-1. Make sure you have [NodeJS](https://nodejs.org/en/download/) version 18+ installed.
-2. Open the terminal.
-3. Navigate to frontend project `cd frontend/`
-4. Install all dependencies with npm `npm install`. NB: This might take a while.
-5. Start the development server `npm run start`.
-   Frontend runs on port 4200, so make sure it's not in use.
-   
-   First build takes a lot of time, so be patient...
+Checkouts could be returned in 3 ways (opened (those that are not returned yet), closed(already returned), 
+late (those that are over dated))
 
-   ![Compiling](https://imgs.xkcd.com/comics/compiling.png)
-6. Once development server is running, open app at http://localhost:4200. If you can see a list of books then it means that you have sucessfully set up and run the application
-7. Start coding :)
+For getting all late checkouts I in CheckoutRepository I used @Query using native SQL statements.
 
-##General guidelines
+From frontend I do not use checkout deletion, but I use setDate method to set up returned date for checkout.
 
-* Tasks don't have to be completed in order.
-* Try to complete as many as possible. 
-* You are free to modify both front-end and back-end as you deem necessary. This includes the option to use another front-end framework if you wish.
-* Regarding UI design, you are also free to choose: use Material Design components, your favorite library or implement everything yourself.
-* You can and are encouraged to also implement additional cool features that you think would
-really help showcase and distinguish your skills.
+## Frontend
 
-* We appreciate if you use version control and commit often, so we can also get an insight into your
-workflow and how you approached the problems. 
+On frontend I have 4 main pages.
 
-* Please document your added functionality, it would be helpful if you point out what was easy / difficult / interesting etc
+1. Books: using axios I return all the existed books in alphabetical order.
+From this page there is possible to delete particular book, click "more info" to watch
+book in a separate page or mark this book as a favourite (it appears in FAVOURITE section).(Used localStorage)
 
-* If you are using in your solution code written by other people 
-(examples, tutorials, StackOverflow etc), then please cite the source for these blocks
-in your solution using comments. This helps us distinguish code written by you.
+2. Books Options (contains 4 options to work with)
+   1. Search by status - leads to separate page where choosing status are returned all the books 
+   with chosen status.
+   2. Search by title - leads to separate page where it is possible to find book by title (ignored case).
+   3. Add book - possible to add a new book to the database.
+   4. Books - leads to the page where all books are displayed.
 
-If you have any questions, please reach out without hesitation. Best of luck!
+3. Checkouts: contains of 3 options. There you can choose which checkouts you want to see (opened, closed or late)
+For each checkout there is a button "more info". When you push this button you can see details about particular
+checkout (due date, checkout date ...). Also you can push "return book". If you push it checkout automatically 
+gets returnedDate and book status changes to AVAILABLE. It is possible to get info about reserved book from
+checkoutView.
+4. Favourite books: display all books that are marked as favourite. It is possible to delete book from
+favourites and also get more info about this book by pushing "more info".
 
-##Development tasks
 
-* Using backend api endpoint /getBooks, implement table of books view +
-* Using backend api endpoint /getCheckouts, also implement the checkouts view. Suppport paging and sorting for both views +
-* Implement individual book and checkout view, support basic CRUD operations, implement checking out and returning books
-* Implement searching for books using freetext criteria +
-* Implement filtering for books by status +
-* Implement saving / displaying favorite books for current user (you can use localStorage if you don't want to make back-end changes)
-* Add modal confirmation dialogues when deleting or checking out books
-* Implement a user-friendly way to display late checkouts
+Working on frontend I also added modal confirmation dialogues.
 
-#####Bonus tasks:
-* Implement advanced search form for books, where user can specify and combine different criterias (title, author year etc)
-* Add UI and backend tests 
-* Add support for multiple languages
-* Add support for multiple users and different user roles: reader and librarian.
-Reader should not be able to add / modify / delete existing book information or tamper with checkouts
-but should be able to save favorites and check out / return books (that they have checked out)
-* Containerize your application to make it cloud-native
+
 
