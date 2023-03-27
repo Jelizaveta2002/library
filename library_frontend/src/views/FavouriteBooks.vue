@@ -31,8 +31,8 @@ export default {
     }
   },
   methods: {
-    deleteFavourite() {
-      const bookIndexToDelete = this.favoriteBooks.findIndex(book => book === book);
+    deleteFavourite(obj) {
+      const bookIndexToDelete = this.favoriteBooks.findIndex(book => book.id === obj.id);
       if (bookIndexToDelete !== -1) {
         this.favoriteBooks.splice(bookIndexToDelete, 1);
         localStorage.setItem('favoriteBooks', JSON.stringify(this.favoriteBooks));
