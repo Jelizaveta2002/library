@@ -77,7 +77,7 @@ export default {
     },
     deleteBook(obj) {
       if (obj.status === "BORROWED") {
-        alert("Book can not be deleted, because it is borrowed or marked as favourite !")
+        alert("Book can not be deleted, because it is borrowed!")
       }
       else {
         if (window.confirm('Are you sure you want to delete this book?')) {
